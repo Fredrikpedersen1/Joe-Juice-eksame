@@ -1,28 +1,21 @@
-const express = renquire("express");
-const cors = require("cors");
-const path = require("path");
+const express = require('express');
+
+
+
+
+
 const app = express();
+const port = 3000;
 
-app.use(cors());
-app.use("/static", express.static("public"));
-app.use((req, res, next) => {
-    console.log("----- HTTP Request -----");
-    console.log(`Method: ${req.method}`); // HTTP Method
-    console.log(`URL: ${req.originalUrl}`); // Requested URL
-    console.log("Headers:", req.headers); // Request Headers
-    console.log(`IP: ${req.ip}`); // IP Address
-    console.log("------------------------");
-    next();
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Sample route
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-app.get("/res", (req, res) => {
-  res.send("Response message from server");
-});
-
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
