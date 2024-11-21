@@ -1,21 +1,23 @@
-const express = require('express');
-
-
-
-
-
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
 const app = express();
-const port = 3000;
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+app.use("/static", express.static("public"));
 
-// Serve welcome.html for the root URL
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'welcome.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+  
+app.get("/tutorial.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "html", "tutorial.html"));
+  });
+
+app.get("/res", (req, res) => {
+  res.send("Response message from server");
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
 });
