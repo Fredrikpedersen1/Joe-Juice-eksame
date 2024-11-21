@@ -1,13 +1,15 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333;
+    background-color: #fff; /* Endrer bakgrunnsfargen til hvit */
+    color: #333; /* Gjør tekstfargen mørkegrå for lesbarhet */
 }
 
 /* Header styles */
 header {
-    background-color: #FFC0CB;
+    background-color: #f6c0d8;
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -15,6 +17,49 @@ header {
 
 header h1 {
     margin: 0;
+}
+
+/* Navigation styles */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Avstand mellom logoen og knappene */
+    padding: 0;
+    margin-left: 20px; /* Juster plassering fra venstre */
+}
+
+nav .logo {
+    width: 80px; /* Øker bredden */
+    height: auto; /* Bevarer proporsjonene */
+    margin-right: 20px; /* Avstand mellom logo og knappene */
+}
+
+nav ul {
+    list-style: none; /* Fjerner standard punktmerking */
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000; /* Gjør teksten svart */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Fin font */
+    font-size: 16px; /* Størrelse på skriften */
+    font-weight: 500; /* Tykkelse på skriften */
+    padding: 5px; /* Gir litt klikkbart område */
+    transition: all 0.2s ease-in-out; /* Smooth overgang ved hover */
+}
+
+nav ul li a:hover {
+    text-decoration: underline; /* Legger til understrek ved hover */
 }
 
 /* Main content styles */
@@ -32,11 +77,66 @@ p {
 
 /* Footer styles */
 footer {
-    background-color: #FFC0CB;
+    background-color: #f6c0d8;
     color: #fff;
     text-align: center;
     padding: 10px 0;
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+/* Login form styles */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f6c0d8; /* Lys rosa for å matche header og footer */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff; /* Hvit tekst for kontrast */
+}
+
+.login-form input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; /* Hvitt input-felt */
+    color: #333; /* Mørk tekst for input */
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #e59ab4; /* Dypere rosa ved fokus */
+    box-shadow: 0 0 5px rgba(229, 154, 180, 0.5);
+}
+
+.login-form .btn {
+    background-color: #e59ab4; /* Dyp rosa for knapper */
+    color: #fff; /* Hvit tekst */
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.login-form .btn:hover {
+    background-color: #d489a3; /* Litt mørkere rosa ved hover */
 }
