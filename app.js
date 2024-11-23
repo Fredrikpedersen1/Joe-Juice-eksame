@@ -14,6 +14,14 @@ app.get("/tutorial.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "html", "tutorial.html"));
   });
 
+app.get("/signup.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "html", "signup.html"));
+  });
+
+app.get("/login.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "html", "login.html"));
+  } );
+
 app.get("/res", (req, res) => {
   res.send("Response message from server");
 });
