@@ -5,37 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joe & The Juice</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/public/css/index.css">
 </head>
 <body>
     <header>
+        <img src="/public/picture/joe_logo.jpg" alt="Joe and the Juice Logo" class="logo">
         <nav>
-            <img src="/static/picture/joe_logo.jpg" alt="Joe and the Juice Logo" class="logo">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="tutorial.html">Tutorial</a></li>
-            </ul>
+            <!-- Left side navigation -->
+            <div class="left">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="tutorial.html">Tutorials</a></li>
+                </ul>
+            </div>
+            <!-- Right side navigation -->
+            <div class="right">
+                <ul>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Signup</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <section id="home">
-            <h1>Welcome to Joe & The Juice</h1>
-            <p>Your favorite place for fresh juices, coffee, and more.</p>
-        </section>
-
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Learn more about our story and values.</p>
-            <!-- Add about us content here -->
-        </section>
-
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Get in touch with us.</p>
-            <!-- Add contact form or details here -->
-        </section>
-    </main>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Joe & The Juice training</h1>
+            <p>Here you will find training videos. Complete them all to get diplomas</p>
+            <a href="tutorial.html" class="btn">Start training now</a>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2023 Joe & The Juice. All rights reserved.</p>
