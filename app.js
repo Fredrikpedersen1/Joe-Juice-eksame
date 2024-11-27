@@ -7,6 +7,7 @@ const sqlite3 = require('sqlite3').verbose();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cloudinary = require("cloudinary").v2;
+const bcrypt = require('bcrypt');
 
 const PORT = 3000;
 
@@ -64,32 +65,47 @@ app.get('/signup.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'html', 'signup.html'));
 });
 
-app.post('/signup', (req, res) => {
-    const { name, email, phone, password } = req.body;
+app.post('/signup', async (req, res) => {
+  const { name, email, phone, password } = req.body;
 
-    const query = `INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)`;
-    db.run(query, [name, email, phone, password], function (err) {
-        if (err) {
-            console.error(err.message);
-            return res.status(400).send('Error creating user');
-        }
-        res.status(200).send('Signup successful');
-    });
+  try {
+      const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+      const query = `INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)`;
+      db.run(query, [name, email, phone, hashedPassword], function (err) {
+          if (err) {
+              console.error(err.message);
+              return res.status(400).send('Error creating user');
+          }
+          res.status(200).send('Signup successful');
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error');
+  }
 });
 
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
 
-    const query = `SELECT * FROM users WHERE email = ? AND password = ?`;
-    db.get(query, [email, password], (err, row) => {
-        if (err || !row) {
-            return res.status(401).send('Invalid credentials');
-        }
-        res.cookie('user', email, { httpOnly: true, path: '/' });
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
 
-        res.status(200).send('Login successful');
-    });
+  const query = `SELECT * FROM users WHERE email = ?`;
+  db.get(query, [email], async (err, row) => {
+      if (err || !row) {
+          return res.status(401).send('Invalid credentials');
+      }
+
+      // Compare the hashed password
+      const isMatch = await bcrypt.compare(password, row.password);
+      if (!isMatch) {
+          return res.status(401).send('Invalid credentials');
+      }
+
+      // Set the cookie if login is successful
+      res.cookie('user', email, { httpOnly: true, path: '/' });
+      res.status(200).send('Login successful');
+  });
 });
+
 
 app.get('/logout', (req, res) => {
     res.clearCookie('user', { path: '/' });
