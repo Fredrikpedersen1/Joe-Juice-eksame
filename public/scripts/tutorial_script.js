@@ -1,5 +1,7 @@
+/*
 
 const path = require('path');
+//require('dotenv').config();
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 const express = require("express");
 const cloudinary = require("cloudinary").v2;
@@ -65,3 +67,5 @@ app.listen(PORT, () => {
 console.log("Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
 console.log("API Key:", process.env.CLOUDINARY_API_KEY);
 console.log("API Secret:", process.env.CLOUDINARY_API_SECRET);
+
+*/

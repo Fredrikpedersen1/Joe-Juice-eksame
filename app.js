@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -5,6 +6,7 @@ const app = express();
 const sqlite3 = require('sqlite3').verbose();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cloudinary = require("cloudinary").v2;
 
 const PORT = 3000;
 
@@ -98,6 +100,50 @@ app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
 });
+
+
+
+// CLOUDINARY -----------------------------------------------------------------
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET, // api_secret
+  secure: true,
+});
+
+
+app.get("/api/uploads", async (req, res) => {
+    try {
+      const result = await cloudinary.api.resources({
+        prefix: "JOEsandwich/", // Bruk riktig mappe her
+        type: "upload",
+        resource_type: "video", // Henter både bilder og videoer
+        max_results: 100, // Juster antall ressurser
+      });
+      res.json(result.resources); // Returnerer ressurser som JSON
+    } catch (error) {
+      console.error("Error fetching Cloudinary resources:", error);
+      res.status(500).json({ error: "Failed to fetch resources" });
+    }
+  });
+
+
+  app.get("/api/uploads/newfolder", async (req, res) => {
+    try {
+      const result = await cloudinary.api.resources({
+        prefix: "JOEsmoothie/", // Sett mappenavnet her
+        type: "upload",
+        resource_type: "video", // Juster til "all" hvis du vil ha både bilder og videoer
+        max_results: 100, // Juster etter behov
+      });
+      res.json(result.resources); // Returnerer dataen som JSON
+    } catch (error) {
+      console.error("Error fetching resources:", error);
+      res.status(500).json({ error: "Failed to fetch resources" });
+    }
+  });
+
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
