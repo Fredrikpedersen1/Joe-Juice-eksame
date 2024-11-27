@@ -63,7 +63,7 @@ nav ul li a:hover {
 .hero {
     position: relative;
     height: 100vh;
-    background: url('/public/picture/joe-the-juice.jpg') center/cover no-repeat;
+    background: url('../picture/joe-the-juice.jpg') center/cover no-repeat;
 }
 
 .hero-content {
