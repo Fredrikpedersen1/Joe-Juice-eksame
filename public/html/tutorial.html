@@ -20,12 +20,27 @@
     </header>
 
     <main>
-        <section id="home">
-            <h1>tutorials</h1>
-            <div id="media-container">
-                <!-- Media blir lagt til her via JavaScript -->
-            </div>
+        <h1>Sandwich Tutorials</h1>
+        
+        <!-- Galleri for eksisterende videoer -->
+        <section id="video-gallery" class="video-gallery common-gallery">
+            <!-- Dynamisk generert innhold her -->
         </section>
+        
+        <!-- Galleri for nye videoer -->
+        <h1>Smoothie Tutorials</h1>
+        <section id="new-video-gallery" class="video-gallery common-gallery">
+            <!-- Dynamisk generert innhold her -->
+        </section>
+        
+        <!-- Popup for videoavspilling -->
+        <div id="video-popup" class="hidden">
+            <div class="popup-content">
+                <button id="close-popup">×</button>
+                <video id="popup-video" controls></video>
+            </div>
+        </div>
+    </main>
     </main>
 
     <footer>
